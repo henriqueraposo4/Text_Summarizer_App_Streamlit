@@ -153,7 +153,7 @@ if action == "Summarize Text":
 disable_button = max_min_warning is not None
 
 # Button to trigger analysis
-if st.button("Analyze Text", disable_button):
+if st.button("Analyze Text", disabled = disable_button):
     #check if there is an input
     if user_text.strip() == "":
         st.warning("Please enter some text")
