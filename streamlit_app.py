@@ -15,7 +15,7 @@ import re
 
 #Define Functions used
 
-# Function to check if input text is in English and contains words
+#function to check if input text is in English and contains words
 def check_input_text(text):
     # Check if the input text contains words (not just spaces or punctuation)
     if len(re.findall(r'[a-zA-Z]+', text)) == 0:
@@ -41,6 +41,24 @@ def summarize_text(text,max_words,min_words):
     output = summarizer(text, max_length=max_length_token, min_length=min_length_token, do_sample = False)
 
     return output[0]['summary_text']
+
+#function to check the max and min words 
+def check_max_and_min(user_text, max_words, min_words):
+    user_text_word_count = len(user_text.split())
+    
+    # Check if max_words > min_words
+    if max_words < min_words:
+        return "Maximum words should be greater than Minimum words."
+    
+    # Check if min_words is less than the number of words in the text
+    if min_words > user_text_word_count:
+        return f"Minimum words cannot be greater than the number of words in the text ({user_text_word_count})."
+    
+    # Check if max_words is less than the number of words in the text
+    if max_words > user_text_word_count:
+        return f"Maximum words cannot be greater than the number of words in the text ({user_text_word_count})."
+    
+    return None
 
 #function to extrack the key words
 def extract_key_words(text):
@@ -124,6 +142,11 @@ if action == "Summarize Text":
         "Please note: The summarized text may not exactly match the specified number of words due to tokenization, but it will approximate the desired reulst"
     )
 
+# Check max_words and min_words
+if action == "Summarize Text":
+    validation_message = check_max_and_min(user_text, max_words, min_words)
+    if validation_message:
+        st.warning(validation_message)
 
 # Button to trigger analysis
 if st.button("Analyze Text"):
