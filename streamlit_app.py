@@ -143,13 +143,17 @@ if action == "Summarize Text":
     )
 
 # Check max_words and min_words
+max_min_warning = None
 if action == "Summarize Text":
-    validation_message = check_max_and_min(user_text, max_words, min_words)
-    if validation_message:
-        st.warning(validation_message)
+    max_min_warning = check_max_and_min(user_text, max_words, min_words)
+    if max_min_warning:
+        st.warning(max_min_warning)
+
+# Button to trigger analysis (disabled if max_min_warning exists)
+disable_button = max_min_warning is not None
 
 # Button to trigger analysis
-if st.button("Analyze Text"):
+if st.button("Analyze Text", disable_button):
     #check if there is an input
     if user_text.strip() == "":
         st.warning("Please enter some text")
