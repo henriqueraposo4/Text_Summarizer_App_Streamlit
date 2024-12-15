@@ -173,15 +173,16 @@ if st.button("Analyze Text", disable_button):
                     st.subheader("Key Words")
                     st.success(", ".join(key_words))
 
+#If app stops working due to memory usage, try rebooting the app or clear cache by using code below
 # Function to clear cache
-def clear_cache():
-    st.cache_data.clear()  # Clears cached data
-    st.cache_resource.clear()  # Clears cached resources (e.g., models)
-    st.success("Cache cleared successfully!")
+# def clear_cache():
+#     st.cache_data.clear()  # Clears cached data
+#     st.cache_resource.clear()  # Clears cached resources (e.g., models)
+#     st.success("Cache cleared successfully!")
 
-# Add a button to clear the cache
-if st.button("Clear Cache"):
-    clear_cache()
+# # Add a button to clear the cache
+# if st.button("Clear Cache"):
+#     clear_cache()
 
 #to run app
 #python3 -m streamlit run streamlit_app.py
